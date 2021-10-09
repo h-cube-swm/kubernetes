@@ -1,0 +1,7 @@
+resources:
+  - auth.yaml
+namespace: production
+secretGenerator:
+  - name: secret-auth
+    envs:
+      - .env.secret

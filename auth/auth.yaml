@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-auth:latest
+          env:
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: secret-auth
+                  key: client-id
+            - name: CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: secret-auth
+                  key: callback-url
+            - name: ROOT_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: secret-auth
+                  key: root-domain
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth
+spec:
+  selector:
+    app: auth
+  ports:
+    - protocol: TCP
+      port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingress-auth
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`auth.the-form.io`)
+      kind: Rule
+      services:
+        - name: auth
+          port: 80
+  tls: {}
