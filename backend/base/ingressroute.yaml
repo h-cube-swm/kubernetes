@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingress-backend
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`api.the-form.io`)
+      kind: Rule
+      services:
+        - name: backend
+          port: 80
+  tls: {}

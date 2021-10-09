@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-backend-express:latest
+          env:
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: secret-backend
+                  key: db-url
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret-backend
+                  key: aws-access-key
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret-backend
+                  key: aws-secret-key
+            - name: ADMIN_LIST
+              valueFrom:
+                secretKeyRef:
+                  name: secret-backend
+                  key: admin-list
+          ports:
+            - containerPort: 80
