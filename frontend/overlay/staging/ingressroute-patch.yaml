@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingress-frontend
+spec:
+  routes:
+    - match: Host(`staging.the-form.io`)
+      kind: Rule
+      services:
+        - name: frontend
+          port: 80
