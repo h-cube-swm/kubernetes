@@ -37,5 +37,10 @@ spec:
                 secretKeyRef:
                   name: secret-backend
                   key: admin-list
+            - name: DRAW_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: secret-backend
+                  key: draw-token
           ports:
             - containerPort: 80
