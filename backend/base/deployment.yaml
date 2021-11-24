@@ -22,12 +22,12 @@ spec:
                 secretKeyRef:
                   name: secret-backend
                   key: db-url
-            - name: AWS_ACCESS_KEY
+            - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
                   name: secret-backend
                   key: aws-access-key
-            - name: AWS_SECRET_KEY
+            - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   name: secret-backend
@@ -37,5 +37,10 @@ spec:
                 secretKeyRef:
                   name: secret-backend
                   key: admin-list
+            - name: DRAW_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: secret-backend
+                  key: draw-token
           ports:
             - containerPort: 80
