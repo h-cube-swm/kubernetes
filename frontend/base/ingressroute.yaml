@@ -4,6 +4,7 @@ metadata:
   name: ingress-frontend
 spec:
   entryPoints:
+    - web
     - websecure
   routes:
     - match: Host(`the-form.io`)
