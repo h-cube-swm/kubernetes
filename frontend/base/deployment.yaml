@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -17,3 +17,5 @@ spec:
           image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-frontend:latest
           ports:
             - containerPort: 80
+      imagePullSecrets:
+        - name: ap-northeast-2-ecr-registry

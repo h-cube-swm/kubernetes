@@ -4,7 +4,7 @@ metadata:
   name: backend
   namespace: default
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: backend
@@ -44,3 +44,5 @@ spec:
                   key: draw-token
           ports:
             - containerPort: 80
+      imagePullSecrets:
+        - name: ap-northeast-2-ecr-registry

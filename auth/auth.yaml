@@ -33,6 +33,8 @@ spec:
                   key: root-domain
           ports:
             - containerPort: 80
+      imagePullSecrets:
+        - name: ap-northeast-2-ecr-registry
 ---
 apiVersion: v1
 kind: Service
