@@ -15,7 +15,7 @@ spec:
             region: ap-northeast-2
             accessKeyID: AKIASLXIZKRMHWH4M6VZ
             secretAccessKeySecretRef:
-              name: secret-iam-route53
+              name: iam-route53
               key: secret-access-key
 ---
 apiVersion: cert-manager.io/v1
