@@ -1,14 +1,39 @@
 apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: https-redirection
+spec:
+  redirectScheme:
+    scheme: https
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingress-frontend-redirect
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`the-form.io`)
+      services:
+        - name: frontend
+          port: 80
+      middlewares:
+        - name: https-redirection
+  tls: {}
+
+---
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: ingress-frontend
 spec:
   entryPoints:
-    - web
     - websecure
   routes:
-    - match: Host(`the-form.io`)
-      kind: Rule
+    - kind: Rule
+      match: Host(`the-form.io`)
       services:
         - name: frontend
           port: 80
