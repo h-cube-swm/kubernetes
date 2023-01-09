@@ -15,22 +15,9 @@ spec:
       containers:
         - name: auth
           image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-auth:latest
-          env:
-            - name: CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: secret-auth
-                  key: client-id
-            - name: CALLBACK_URL
-              valueFrom:
-                secretKeyRef:
-                  name: secret-auth
-                  key: callback-url
-            - name: ROOT_DOMAIN
-              valueFrom:
-                secretKeyRef:
-                  name: secret-auth
-                  key: root-domain
+          envFrom:
+          - secretRef:
+              name: secret-auth
           ports:
             - containerPort: 80
       imagePullSecrets:
