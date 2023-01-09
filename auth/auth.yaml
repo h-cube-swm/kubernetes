@@ -15,9 +15,37 @@ spec:
       containers:
         - name: auth
           image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-auth:latest
-          envFrom:
-          - secretRef:
-              name: secret-auth
+          env:
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: secret-auth
+                  key: client-id
+            - name: CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: secret-auth
+                  key: callback-url
+            - name: ROOT_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: secret-auth
+                  key: root-domain
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: secret-auth
+                  key: google-client-id
+            - name: GOOGLE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: secret-auth
+                  key: google-client-secret
+            - name: GOOGLE_CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: secret-auth
+                  key: google-callback-url
           ports:
             - containerPort: 80
       imagePullSecrets:
