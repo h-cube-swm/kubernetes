@@ -48,6 +48,11 @@ spec:
                   key: google-callback-url
           ports:
             - containerPort: 80
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 60
+            periodSeconds: 60
       imagePullSecrets:
         - name: ap-northeast-2-ecr-registry
 ---
