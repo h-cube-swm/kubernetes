@@ -49,10 +49,14 @@ spec:
           ports:
             - containerPort: 80
           livenessProbe:
-            tcpSocket:
-              port: 80
-            initialDelaySeconds: 60
-            periodSeconds: 60
+            exec:
+              command:
+                - curl
+                - --fail
+                - auth.the-form.io
+            failureThreshold: 5
+            initialDelaySeconds: 10
+            periodSeconds: 10
       imagePullSecrets:
         - name: ap-northeast-2-ecr-registry
 ---
