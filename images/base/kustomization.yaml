@@ -4,6 +4,6 @@ secretGenerator:
   - name: secret-rdb
     envs:
       - .env.rdb.secret
-  # - name: secret-images
-  #   envs:
-  #     - .env.secret
+  - name: secret-images
+    envs:
+      - .env.secret
