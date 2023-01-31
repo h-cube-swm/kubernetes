@@ -18,19 +18,17 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5432
-          env:
-            - name: POSTGRES_USER
-              value: "theform"
-            - name: POSTGRES_PASSWORD
-              value: "theform"
+          envFrom:
+            - secretRef:
+                name: secret-rdb
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: image-rdb
           resources:
-            requests:
+            limits:
               memory: 500Mi
               cpu: 200m
-            limits:
+            requests:
               memory: 500Mi
               cpu: 200m
       volumes:
