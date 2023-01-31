@@ -1,0 +1,5 @@
+bases:
+  - ../../base
+namespace: staging
+patchesStrategicMerge:
+  - patch.yaml

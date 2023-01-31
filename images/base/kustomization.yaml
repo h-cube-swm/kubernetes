@@ -1,0 +1,6 @@
+resources:
+  - kubernetes.yaml
+secretGenerator:
+  - name: secret-images
+    envs:
+      - .env.secret
