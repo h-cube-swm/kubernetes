@@ -13,7 +13,7 @@ spec:
         app: images
     spec:
       imagePullSecrets:
-        - name: secret-image-pull
+        - name: ap-northeast-2-ecr-registry
       containers:
         - name: images
           image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-backend-images:latest

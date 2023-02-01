@@ -13,36 +13,13 @@ spec:
       labels:
         app: backend
     spec:
+      imagePullSecrets:
+        - name: ap-northeast-2-ecr-registry
       containers:
         - name: backend
           image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-backend-express:latest
-          env:
-            - name: DB_URL
-              valueFrom:
-                secretKeyRef:
-                  name: secret-backend
-                  key: db-url
-            - name: AWS_ACCESS_KEY_ID
-              valueFrom:
-                secretKeyRef:
-                  name: secret-backend
-                  key: aws-access-key
-            - name: AWS_SECRET_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: secret-backend
-                  key: aws-secret-key
-            - name: ADMIN_LIST
-              valueFrom:
-                secretKeyRef:
-                  name: secret-backend
-                  key: admin-list
-            - name: DRAW_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: secret-backend
-                  key: draw-token
+          envFrom:
+            - secretRef:
+                name: secret-backend
           ports:
             - containerPort: 80
-      imagePullSecrets:
-        - name: ap-northeast-2-ecr-registry
