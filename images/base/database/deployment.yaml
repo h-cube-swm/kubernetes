@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: mysql
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: mysql
   template:
     metadata:
       labels:
-        app: postgres
+        app: mysql
     spec:
       containers:
-        - name: postgres
-          image: postgres:15.1
+        - name: mysql
+          image: mysql
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 5432
+            - containerPort: 3306
           envFrom:
             - secretRef:
                 name: secret-rdb
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            - mountPath: /var/lib/mysql
               name: image-rdb
           resources:
             limits:
