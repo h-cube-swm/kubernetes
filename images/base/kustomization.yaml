@@ -2,7 +2,6 @@ resources:
   - kubernetes.yaml
   - database/deployment.yaml
   - database/service.yaml
-  - storage/longhorn.yaml
   - storage/pvc.yaml
 secretGenerator:
   - name: secret-rdb
