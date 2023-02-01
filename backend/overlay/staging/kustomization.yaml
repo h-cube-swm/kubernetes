@@ -1,5 +1,5 @@
 bases:
   - ../../base
 patchesStrategicMerge:
-  - ingressroute-patch.yaml
+  - patch.yaml
 namespace: staging
