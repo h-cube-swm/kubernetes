@@ -1,13 +1,23 @@
 resources:
   - kubernetes.yaml
+  - database/deployment.yaml
+  - database/service.yaml
+  - storage/longhorn.yaml
+  - storage/pvc.yaml
 secretGenerator:
   - name: secret-rdb
     envs:
       - .env.rdb.secret
+    options:
+      disableNameSuffixHash: true
   - name: secret-images
     envs:
       - .env.secret
-  - name: secret-image-pull
-    files:
-      - .dockerconfigjson=.dockerconfigjson.secret
-    type: kubernetes.io/dockerconfigjson
+    options:
+      disableNameSuffixHash: true
+  # - name: secret-image-pull
+  #   files:
+  #     - .dockerconfigjson=.dockerconfigjson.secret
+  #   type: kubernetes.io/dockerconfigjson
+  #   options:
+  #     disableNameSuffixHash: true

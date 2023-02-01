@@ -6,3 +6,11 @@ secretGenerator:
   - name: secret-backend
     envs:
       - .env.secret
+    options:
+      disableNameSuffixHash: true
+  # - name: secret-image-pull
+  #   files:
+  #     - .dockerconfigjson=.dockerconfigjson.secret
+  #   type: kubernetes.io/dockerconfigjson
+  #   options:
+  #     disableNameSuffixHash: true
