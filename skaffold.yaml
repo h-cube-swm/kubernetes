@@ -1,0 +1,52 @@
+apiVersion: skaffold/v4beta2
+kind: Config
+metadata:
+  name: kubernetes
+manifests:
+  kustomize:
+    paths:
+    - auth
+build:
+  local:
+    push: false
+  platforms: ["linux/amd64"]
+  # tagPolicy:
+  #   sha256: {}
+  artifacts:
+  - image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-backend-express
+    context: ../server-backend-express
+    docker:
+      dockerfile: Dockerfile
+  - image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-backend-images
+    context: ../server-backend-images
+    docker:
+      dockerfile: Dockerfile
+  - image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-frontend
+    context: ../server-frontend
+    docker:
+      dockerfile: Dockerfile
+  - image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-auth
+    context: ../server-auth
+    docker:
+      dockerfile: Dockerfile
+profiles:
+- name: auth
+  manifests:
+    kustomize:
+      paths:
+      - auth
+- name: backend
+  manifests:
+    kustomize:
+      paths:
+      - backend/base
+- name: frontend
+  manifests:
+    kustomize:
+      paths:
+      - frontend/base
+- name: images
+  manifests:
+    kustomize:
+      paths:
+      - images/base
