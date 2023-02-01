@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: auth
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: auth
@@ -12,6 +12,8 @@ spec:
       labels:
         app: auth
     spec:
+      imagePullSecrets:
+        - name: ap-northeast-2-ecr-registry
       containers:
         - name: auth
           image: 162623214680.dkr.ecr.ap-northeast-2.amazonaws.com/server-auth:latest
@@ -57,8 +59,6 @@ spec:
             failureThreshold: 5
             initialDelaySeconds: 10
             periodSeconds: 10
-      imagePullSecrets:
-        - name: ap-northeast-2-ecr-registry
 ---
 apiVersion: v1
 kind: Service
