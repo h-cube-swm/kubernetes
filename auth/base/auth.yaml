@@ -55,7 +55,7 @@ spec:
               command:
                 - curl
                 - --fail
-                - auth.the-form.io
+                - https://auth.the-form.io
             failureThreshold: 3
             initialDelaySeconds: 15
             periodSeconds: 5
