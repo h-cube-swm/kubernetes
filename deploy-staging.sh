@@ -9,7 +9,8 @@ kubectl apply -f staging.namespace.yaml
 
 kubectl apply -f docker-config.secret.yaml
 
-kubectl apply -k auth/overlay/staging
+# kubectl apply -k auth/overlay/staging
+
 kubectl apply -k images/overlay/staging
 kubectl apply -k backend/overlay/staging
 kubectl apply -k frontend/overlay/staging
